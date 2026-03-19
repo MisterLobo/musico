@@ -2,6 +2,7 @@ import { AuthButton } from "@/components/auth-button";
 import { EnvVarWarning } from "@/components/env-var-warning";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Field, FieldContent, FieldDescription, FieldLabel, FieldSet, FieldTitle } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -80,41 +81,32 @@ export default async function Page() {
                   </Field>
                 </FieldLabel>
               </RadioGroup>
-              {/* <Card>
-                <CardHeader>
-                  <CardTitle>Student</CardTitle>
-                  <CardDescription>P50 hourly</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <h5 className="text-md font-bold">Amenities</h5>
-                  <span className="flex items-center"><Check size={16} /> Drum set, keyboard, guitar</span>
-                  <span className="flex items-center"><Check size={16} /> Free drinks (for 3 hours up)</span>
-                  <span className="flex items-center"><Check size={16} /> Free parking</span>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader>
-                  <CardTitle>Gig</CardTitle>
-                  <CardDescription>P200 hourly</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <h5 className="text-md font-bold">Amenities</h5>
-                  <span className="flex items-center"><Check size={16} /> All instruments</span>
-                  <span className="flex items-center"><Check size={16} /> Free drinks (for 3 hours up)</span>
-                </CardContent>
-              </Card> */}
             </div>
             <div className="flex flex-row items-center">
               <span className="min-w-48">Date and Time</span>
               <Input type="datetime-local" name="datetime" className="w-fit" />
             </div>
             <div className="flex flex-row items-center">
-              <span className="min-w-48">How many hours</span>
+              <span className="min-w-48">Session hours</span>
               <Input type="number" name="hours" className="w-fit" min={1} max={10} defaultValue={1} />
             </div>
             <div className="h-96 border p-1">
               <span>Gallery</span>
-              <div className="flex size-full items-center justify-center">Coming Soon!</div>
+              <Carousel className="size-full">
+                <CarouselContent className="size-full h-96">
+                  <CarouselItem className="flex items-center justify-center text-5xl">
+                    <span>A</span>
+                  </CarouselItem>
+                  <CarouselItem className="flex items-center justify-center text-5xl">
+                    <span>B</span>
+                  </CarouselItem>
+                  <CarouselItem className="flex items-center justify-center text-5xl">
+                    <span>C</span>
+                  </CarouselItem>
+                </CarouselContent>
+                {/* <CarouselPrevious />
+                <CarouselNext /> */}
+              </Carousel>
             </div>
             <div className="h-96 border p-1">
               <span>Map Preview</span>
