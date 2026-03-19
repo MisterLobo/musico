@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/sidebar"
 
 import data from "./data.json"
+import { Suspense } from "react"
 
 export default function Page() {
   return (
@@ -30,7 +31,9 @@ export default function Page() {
               <div className="px-4 lg:px-6">
                 <ChartAreaInteractive />
               </div>
-              <DataTable data={data} />
+              <Suspense fallback={<p>loading</p>}>
+                <DataTable data={data} />
+              </Suspense>
             </div>
           </div>
         </div>
