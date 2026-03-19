@@ -35,25 +35,27 @@ export default function Home() {
           <main className="flex flex-col gap-6 px-4 w-full">
             <h2 className="font-medium text-xl mb-4">Next step</h2>
             {(new Array(10)).fill(0).map((_, i) => (
-              <Card className="w-full cursor-pointer" key={i}>
-                <CardHeader>
-                  <CardTitle>Studio 1</CardTitle>
-                  <CardDescription>Open 24 hours</CardDescription>
-                </CardHeader>
-                <CardContent className="space-x-4 inline-flex relative">
-                  <div className="flex space-x-1 justify-center">
-                    <Clock size={16} />
-                    <span>Now open</span>
-                  </div>
-                  <div className="flex space-x-1 justify-center">
-                    <MapPin size={16} />
-                    <span>Somewhere, Out there, Earth</span>
-                  </div>
-                  <div className="absolute right-5">
-                    <button className="cursor-pointer">Book now</button>
-                  </div>
-                </CardContent>
-              </Card>
+              <Link href={`/studio/${i+1}`} key={i}>
+                <Card className="w-full cursor-pointer">
+                  <CardHeader>
+                    <CardTitle>Studio 1</CardTitle>
+                    <CardDescription>Open 24 hours</CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-x-4 inline-flex relative">
+                    <div className="flex space-x-1 justify-center">
+                      <Clock size={16} />
+                      <span>Now open</span>
+                    </div>
+                    <div className="flex space-x-1 justify-center">
+                      <MapPin size={16} />
+                      <span>Somewhere, Out there, Earth</span>
+                    </div>
+                    <div className="absolute right-5">
+                      <button className="cursor-pointer">Book now</button>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
             ))}
           </main>
         </div>
