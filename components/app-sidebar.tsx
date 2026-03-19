@@ -42,26 +42,31 @@ const data = {
   navMain: [
     {
       title: "Dashboard",
-      url: "#",
+      url: "/dashboard",
       icon: IconDashboard,
     },
     {
-      title: "Lifecycle",
-      url: "#",
+      title: "Studios",
+      url: "/dashboard/studios",
       icon: IconListDetails,
     },
     {
-      title: "Analytics",
+      title: "Rooms",
+      url: "/dashboard/rooms",
+      icon: IconListDetails,
+    },
+    {
+      title: "Appointments",
       url: "#",
       icon: IconChartBar,
     },
     {
-      title: "Projects",
+      title: "Transactions",
       url: "#",
       icon: IconFolder,
     },
     {
-      title: "Team",
+      title: "Reviews",
       url: "#",
       icon: IconUsers,
     },
@@ -160,9 +165,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               asChild
               className="data-[slot=sidebar-menu-button]:p-1.5!"
             >
-              <a href="#">
+              <a href="/">
                 <IconInnerShadowTop className="size-5!" />
-                <span className="text-base font-semibold">Acme Inc.</span>
+                <span className="text-base font-semibold">Musico</span>
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>
