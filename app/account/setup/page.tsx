@@ -23,12 +23,12 @@ export default function Page() {
     }
   }
   const createCustomerAccount = async (e: React.SubmitEvent) => {
-    // e.preventDefault()
+    e.preventDefault()
     setRole('customer')
     await createAccount('/')
   }
   const createBusinessAccount = async (e: React.SubmitEvent) => {
-    // e.preventDefault()
+    e.preventDefault()
     setRole('business')
     await createAccount('/dashboard')
   }
