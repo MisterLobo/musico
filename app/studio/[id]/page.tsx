@@ -112,8 +112,7 @@ export default async function Page() {
               <div className="flex size-full items-center justify-center">
               </div>
             </div>
-            <Button className="cursor-pointer">Book Appointment</Button>
-            <span>Reviews</span>
+            <Button className="cursor-pointer">Book Slot</Button>
           </main>
         </div>
       </div>
