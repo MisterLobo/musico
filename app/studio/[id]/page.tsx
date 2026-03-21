@@ -1,16 +1,15 @@
-import { AuthButton } from "@/components/auth-button";
-import { EnvVarWarning } from "@/components/env-var-warning";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { Field, FieldContent, FieldDescription, FieldLabel, FieldSet, FieldTitle } from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { hasEnvVars } from "@/lib/utils";
-import { IconBrandFacebook, IconBrandFacebookFilled, IconBrandGoogle, IconBrandGoogleFilled, IconBrandX, IconBrandXFilled, IconBrandYoutube, IconCheck, IconCheckbox, IconCheckFilled, IconCircle, IconCircle0, IconCircleFilled } from "@tabler/icons-react";
-import { Check, CheckCircle, CheckCircle2, Star, X, XIcon } from "lucide-react";
-import Link from "next/link";
-import { Suspense } from "react";
+import { AuthButton } from '@/components/auth-button'
+import { EnvVarWarning } from '@/components/env-var-warning'
+import { Button } from '@/components/ui/button'
+import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel'
+import { Field, FieldContent, FieldDescription, FieldLabel, FieldTitle } from '@/components/ui/field'
+import { Input } from '@/components/ui/input'
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+import { hasEnvVars } from '@/lib/utils'
+import { IconBrandFacebook, IconBrandGoogle, IconBrandX, IconBrandYoutube } from '@tabler/icons-react'
+import { Check, CheckCircle, CheckCircle2, Star, X, XIcon } from 'lucide-react'
+import Link from 'next/link'
+import { Suspense } from 'react'
 
 export default async function Page() {
   return (
@@ -110,7 +109,16 @@ export default async function Page() {
             </div>
             <div className="h-96 border p-1">
               <span>Map Preview</span>
-              <div className="flex size-full items-center justify-center">Coming Soon!</div>
+              <div className="flex size-full items-center justify-center">
+                {/* <iframe
+                  width="450"
+                  height="250"
+                  style={{ border: 0 }}
+                  referrerPolicy="no-referrer-when-downgrade"
+                  src="https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJj61dQgK6j4AR4GeTYWZsKWw&fields=name%2Cformatted_address&key=AIzaSyALLx-csMyu8BUVwbbBH3FK2b_UT0sizjQ&q=Eiffel+Tower,Paris+France"
+                  allowFullScreen>
+                </iframe> */}
+              </div>
             </div>
             <Button className="cursor-pointer">Book Appointment</Button>
             <span>Reviews</span>

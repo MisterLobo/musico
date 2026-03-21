@@ -11,7 +11,7 @@ import {
 import data from "./data.json"
 import { Suspense } from "react"
 
-export default function DashboardLayout({
+export default async function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -26,9 +26,11 @@ export default function DashboardLayout({
       }
     >
       <AppSidebar variant="inset" />
-      <SidebarInset>
-        {children}
-      </SidebarInset>
+      <Suspense fallback={<p>loading</p>}>
+        <SidebarInset>
+          {children}
+        </SidebarInset>
+      </Suspense>
     </SidebarProvider>
   )
 }
