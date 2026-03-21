@@ -1,6 +1,6 @@
 "use client"
 
-import { IconCirclePlusFilled, IconMail, type Icon } from "@tabler/icons-react"
+import { IconMapPin2, IconMicrophone2, type Icon } from "@tabler/icons-react"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -31,20 +31,23 @@ export function NavMain({
               tooltip="New Studio"
               className="min-w-8 bg-primary text-primary-foreground duration-200 ease-linear hover:bg-primary/90 hover:text-primary-foreground active:bg-primary/90 active:text-primary-foreground cursor-pointer"
               onClick={() => {
-                router.push('/dashboard/new');
+                router.replace('/dashboard/rooms/new')
               }}
             >
-              <IconCirclePlusFilled />
-              <span>New Studio</span>
+              <IconMicrophone2 />
+              <span>New Room</span>
             </SidebarMenuButton>
-            {/* <Button
+            <Button
               size="icon"
-              className="size-8 group-data-[collapsible=icon]:opacity-0"
+              className="size-8 group-data-[collapsible=icon]:opacity-0 cursor-pointer"
               variant="outline"
+              onClick={() => {
+                router.replace('/dashboard/new')
+              }}
             >
-              <IconMail />
-              <span className="sr-only">Inbox</span>
-            </Button> */}
+              <IconMapPin2 />
+              <span className="sr-only">New Studio</span>
+            </Button>
           </SidebarMenuItem>
         </SidebarMenu>
         <SidebarMenu>
