@@ -60,7 +60,11 @@ export async function updateSession(request: NextRequest) {
   }
 
   // console.log('url:', request.nextUrl)
-  if (request.nextUrl.pathname !== '/account/setup') {
+  if (
+    request.nextUrl.pathname !== '/account/setup' &&
+    !request.nextUrl.pathname.startsWith("/login") &&
+    !request.nextUrl.pathname.startsWith("/auth")
+  ) {
     const has = await checkHasTenants()
     if (!has) {
       const url = request.nextUrl.clone()
