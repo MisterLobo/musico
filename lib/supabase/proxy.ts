@@ -49,10 +49,14 @@ export async function updateSession(request: NextRequest) {
   const user = data?.claims;
 
   if (
-    !user &&
-    !request.nextUrl.pathname.startsWith("/login") &&
+    request.nextUrl.pathname === '/' ||
+    !request.nextUrl.pathname.startsWith("/login") ||
     !request.nextUrl.pathname.startsWith("/auth")
   ) {
+    return supabaseResponse
+  }
+
+  if (!user) {
     // no user, potentially respond by redirecting the user to the login page
     const url = request.nextUrl.clone();
     url.pathname = '/auth/login'
@@ -60,11 +64,7 @@ export async function updateSession(request: NextRequest) {
   }
 
   // console.log('url:', request.nextUrl)
-  if (
-    request.nextUrl.pathname !== '/account/setup' &&
-    !request.nextUrl.pathname.startsWith("/login") &&
-    !request.nextUrl.pathname.startsWith("/auth")
-  ) {
+  if (request.nextUrl.pathname !== '/account/setup') {
     const has = await checkHasTenants()
     if (!has) {
       const url = request.nextUrl.clone()
