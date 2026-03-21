@@ -29,6 +29,26 @@ export async function checkHasTenants() {
   return (count ?? 0) > 0
 }
 
+export async function getTenant(id: string) {
+  const supabase = await createClient()
+
+  const { data: tenantData, error: tenantError } = await supabase.from('tenants')
+    .select('id,type,status,country,currency,online_status,active_studio')
+    .eq('id', id)
+    .maybeSingle()
+
+  if (tenantError) throw tenantError
+
+  return tenantData
+}
+
+export async function getActiveStudio() {
+  const active = await getActiveTenant()
+  const tenant = await getTenant(active)
+
+  return tenant?.active_studio
+}
+
 export async function getActiveTenant() {
   const supabase = await createClient()
   const { data } = await supabase.auth.getClaims()
@@ -43,7 +63,7 @@ export async function getTenantForUser(id: string) {
   const { data: tenantData, error: tenantError } = await supabase.from('tenants')
     .select('id')
     .eq('owner_id', id)
-    .single()
+    .maybeSingle()
 
   if (tenantError) throw tenantError
 
@@ -60,8 +80,9 @@ export async function createNewStudio(profileCreateParams: Record<string, any>, 
       ...profileCreateParams,
     })
     .select('id')
+    .maybeSingle()
 
-  const profile = profileData?.[0]
+  const profile = profileData
 
   console.error(profileError)
 
@@ -74,14 +95,65 @@ export async function createNewStudio(profileCreateParams: Record<string, any>, 
       ...studioCreateParams,
     })
     .select('id')
+    .maybeSingle()
 
     console.error(studioError)
   if (studioError) throw studioError
 
-  const studio = studioData?.[0]
+  const studio = studioData
 
   return {
     profile,
     studio,
   }
+}
+
+export async function createNewRoom(createParams: Record<string, any>) {
+  const supabase = await createClient()
+  const tenantId = await getActiveTenant()
+
+  const activeStudio = await getActiveStudio()
+
+  const { data, error } = await supabase.from('studio_rooms')
+    .insert({
+      tenant_id: tenantId,
+      studio_id: activeStudio,
+      ...createParams,
+    })
+    .select('id')
+    .maybeSingle()
+
+  if (error) throw error
+
+  return { room: data?.id }
+}
+
+export async function listStudioRooms(studioId: string) {
+  const supabase = await createClient()
+  const tenantId = await getActiveTenant()
+
+  const { data, error } = await supabase.from('studio_rooms')
+    .select('*')
+    .eq('tenant_id', tenantId)
+    .eq('studio_id', studioId)
+    .range(0, 10)
+
+  if (error) throw error
+
+  return data
+}
+
+export default async function listTenantStudios(tenantId: string) {
+  const supabase = await createClient()
+
+  const { data, error } = await supabase.from('studio_brands')
+    .select('*')
+    .eq('tenant_id', tenantId)
+    .range(0, 10)
+
+  console.log(data?.length)
+
+  if (error) throw error
+
+  return data
 }
