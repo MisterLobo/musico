@@ -110,14 +110,6 @@ export default async function Page() {
             <div className="h-96 border p-1">
               <span>Map Preview</span>
               <div className="flex size-full items-center justify-center">
-                {/* <iframe
-                  width="450"
-                  height="250"
-                  style={{ border: 0 }}
-                  referrerPolicy="no-referrer-when-downgrade"
-                  src="https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJj61dQgK6j4AR4GeTYWZsKWw&fields=name%2Cformatted_address&key=AIzaSyALLx-csMyu8BUVwbbBH3FK2b_UT0sizjQ&q=Eiffel+Tower,Paris+France"
-                  allowFullScreen>
-                </iframe> */}
               </div>
             </div>
             <Button className="cursor-pointer">Book Appointment</Button>
