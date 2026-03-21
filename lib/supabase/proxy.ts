@@ -1,6 +1,7 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 import { hasEnvVars } from "../utils";
+import { checkHasTenants } from "../actions";
 
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({
@@ -17,7 +18,7 @@ export async function updateSession(request: NextRequest) {
   // variable. Always create a new one on each request.
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
+    process.env.JWT_KEYS!,
     {
       cookies: {
         getAll() {
@@ -55,8 +56,21 @@ export async function updateSession(request: NextRequest) {
   ) {
     // no user, potentially respond by redirecting the user to the login page
     const url = request.nextUrl.clone();
-    url.pathname = "/auth/login";
+    url.pathname = '/auth/login'
     return NextResponse.redirect(url);
+  }
+
+  // console.log('url:', request.nextUrl)
+  if (request.nextUrl.pathname !== '/account/setup') {
+    const has = await checkHasTenants()
+    if (!has) {
+      const url = request.nextUrl.clone()
+      url.pathname = '/account/setup'
+      return NextResponse.redirect(url)
+    }
+    /* const url = request.nextUrl.clone()
+    url.pathname = '/account/setup'
+    return NextResponse.redirect(url) */
   }
 
   // IMPORTANT: You *must* return the supabaseResponse object as it is.
